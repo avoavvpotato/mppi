@@ -52,23 +52,22 @@ ccmake ../cmake/
 Для дальнейшей работы включите в конфигурацию **CMAKE_CXX_EXTENSIONS** и **PKG_COLLOID**
 
 ![image](https://github.com/IKCTO/mppi/assets/131967515/19d6476a-71ec-46d8-bda1-e9e26e876326)
-
-![[Pasted image 20240427004235.png]]
-![[Pasted image 20240427004250.png]]
+![image](https://github.com/IKCTO/mppi/assets/131967515/95eb6aaf-4438-413e-bfe2-89465117d1ea)
 
 Далее нажмите клавишу **c** чтобы сконфигурировать.
 
-![[Pasted image 20240427004302.png]]
+![image](https://github.com/IKCTO/mppi/assets/131967515/7db80355-d880-4179-a534-4deea9284b37)
 
 Затем нажмите клавишу **g** чтобы сгенерировать Makefile. Вы можете проверить его наличие посмотрев список фалов в директории build
-![[Pasted image 20240427004349.png]]
+![image](https://github.com/IKCTO/mppi/assets/131967515/ef3b017a-a11a-4fa5-b2be-1842137434ea)
 
 Чтобы запустить компиляцию программы, пропишите следующую команду:
 ```
 make -j4
 ```
 Таким образом lammps был скомпилирован как библиотека.
-![[Pasted image 20240427004412.png]]
+![image](https://github.com/IKCTO/mppi/assets/131967515/8e629166-61b3-407c-8c54-27cf1e28cff7)
+
 
 Следующая команда:
 ```
@@ -79,7 +78,8 @@ make install
 #### Запуск lammps
 Перейдите в следующий каталог ( если вы действовали чётко согласно инструкции ): ```/home/user-name/lammps/lammps-install/bin```
 Находясь в этом каталоге вы можете запустить lammps командой ```./lmp```:
-![[Pasted image 20240427004427.png]]
+![image](https://github.com/IKCTO/mppi/assets/131967515/88bcba9a-4af7-4fa2-b600-3c65d3a30375)
+
 Чтобы прекратить работу нажмите Ctrl+c.
 #### Дополнительные настройки
 - Также находясь в lammps-install/bin пропишите команду ```pwd``` чтобы получить путь к файлу запуска ```lmp```. Скопируйте этот путь.
@@ -101,7 +101,7 @@ lmp < in.colloid
 ```
 Пример вывода:
 
-![[Pasted image 20240427004446.png]]
+![image](https://github.com/IKCTO/mppi/assets/131967515/3387e379-9b42-4c5d-ab0c-e36edb2c0d64)
 
 #### Реконфигурация
 ```
