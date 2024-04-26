@@ -51,6 +51,7 @@ ccmake ../cmake/
 
 Для дальнейшей работы включите в конфигурацию **CMAKE_CXX_EXTENSIONS** и **PKG_COLLOID**
 
+![image](https://github.com/IKCTO/mppi/assets/131967515/19d6476a-71ec-46d8-bda1-e9e26e876326)
 
 ![[Pasted image 20240427004235.png]]
 ![[Pasted image 20240427004250.png]]
