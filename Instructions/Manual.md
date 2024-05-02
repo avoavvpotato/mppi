@@ -181,6 +181,7 @@ export OMP_NUM_THREADS=1
 ```
 
 ### Установка MLIP
+https://gitlab.com/ashapeev/mlip-2-tutorials/-/wikis/home
 
 # > Базовые функции инструментов
 
