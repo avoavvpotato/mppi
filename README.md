@@ -1,1 +1,1 @@
-MPPI - Material Properties Prediction Instruments v2.0
+MPPI - Material Properties Prediction Instruments
