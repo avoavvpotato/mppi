@@ -37,54 +37,39 @@ cd build
 
 Создайте Cmake:
 ```
-cmake -D CMAKE_INSTALL_PREFIX=/home/user-name/lammps/lammps-install ../cmake/
+cmake -C ../cmake/presets/basic.cmake -D PKG_MANYBODY=yes -D PKG_COLLOID=yes ../cmake
 ```
-#### Конфигурация
-Следующим шагом установите ccmake. Этот инструмент предоставляет своего рода пользовательский интерфейс для просмотра всех доступных опций cmake в проекте. 
+С помощью опции -D мы указываем дополнительные пакеты, которые будут включены в сборку.
+Если во время работы с lammps возникает ошибка, что нет необходоимого пакета, то вернитесь к данному этапу. Скопируйте инструкцию выше и добавьте пакет для установки -D PKG_NAME=yes (NAME - имя пакета для установки)
 ```
-sudo apt-get install cmake-curses-gui
+cmake -C ../cmake/presets/basic.cmake -D PKG_MANYBODY=yes -D PKG_COLLOID=yes -D PKG_NAME=yes ../cmake
 ```
-Пропишите следующую команду, чтобы открыть интерфейс для просмотра доступных опций сборки lammps:
-```
-ccmake ../cmake/
-```
-
-Для дальнейшей работы включите в конфигурацию **CMAKE_CXX_EXTENSIONS** и **PKG_COLLOID**
-
-![image](https://github.com/IKCTO/mppi/assets/131967515/19d6476a-71ec-46d8-bda1-e9e26e876326)
-
-![image](https://github.com/IKCTO/mppi/assets/131967515/95eb6aaf-4438-413e-bfe2-89465117d1ea)
-
-Далее нажмите клавишу **c** чтобы сконфигурировать.
-
-![image](https://github.com/IKCTO/mppi/assets/131967515/7db80355-d880-4179-a534-4deea9284b37)
-
-Затем нажмите клавишу **g** чтобы сгенерировать Makefile. Вы можете проверить его наличие посмотрев список фалов в директории build
-
-![image](https://github.com/IKCTO/mppi/assets/131967515/ef3b017a-a11a-4fa5-b2be-1842137434ea)
+Список доступных пакетов содержится в документации: https://docs.lammps.org/Build_package.html
 
 Чтобы запустить компиляцию программы, пропишите следующую команду:
 ```
-make -j4
+make -j 4
 ```
-Таким образом lammps был скомпилирован как библиотека.
+Таким образом lammps был скомпилирован как библиотека. 
+В директории build должен появиться исполняемый файл lmp. Данный файл можно копировать в директорию с расчетами или указывать путь до файла в директории build.
 
-![image](https://github.com/IKCTO/mppi/assets/131967515/8e629166-61b3-407c-8c54-27cf1e28cff7)
-
-
-Следующая команда:
+#### Запуск тестового расчёта:
+В директории examples (lammps/mylammps/examples) содержатся примеры расчетов.
+Находсь в данном каталоге перейдите в директорию colloid и скопируйте в него исполнемый файл lmp из build. 
+Чтобы скопировать файл используют команду "cp PATH_FROM ." (точка обозначает текущую директорию)
 ```
-make install
+cp ../../build/lmp .
 ```
-Программа записывает все данные в каталог lammps-install.
+Для запуска расчета выполните следующую команду:
+```
+cp lmp -in in.colloid
+```
+Пример вывода:
 
-#### Запуск lammps
-Перейдите в следующий каталог ( если вы действовали чётко согласно инструкции ): ```/home/user-name/lammps/lammps-install/bin```
-Находясь в этом каталоге вы можете запустить lammps командой ```./lmp```:
-
-![image](https://github.com/IKCTO/mppi/assets/131967515/88bcba9a-4af7-4fa2-b600-3c65d3a30375)
+![image](https://github.com/IKCTO/mppi/assets/131967515/3387e379-9b42-4c5d-ab0c-e36edb2c0d64)
 
 Чтобы прекратить работу нажмите Ctrl+c.
+
 #### Дополнительные настройки
 - Также находясь в lammps-install/bin пропишите команду ```pwd``` чтобы получить путь к файлу запуска ```lmp```. Скопируйте этот путь.
 - Вернитесь в ```/home/user-name/``` ( достаточно прописать "cd" в командной строке ).
@@ -95,25 +80,18 @@ make install
 
 >Теперь при запуске новой сессии вы сможете запустить lammps командой ```lmp``` из любого каталога.
 
-#### Запуск тестового расчёта:
-Находясь в корневом каталоге ( пропишите "cd" ) выполните следующие команды ( если вы следовали чётко по инструкции можете просто скопировать и вставить ):
+#### Установка LAMMPS совместимого с MLIP
+Установите MLIP. Для этого выполните инструкции по данной ссылке: https://gitlab.com/ashapeev/mlip-2-tutorials/-/wikis/installation-tutorial
+Чтобы установить lammps с mlip выполните инстуркции с 0-2: https://gitlab.com/ashapeev/interface-lammps-mlip-2/-/blob/master/README.md
+Для выполнения третьего пункта скопируйте содержимое файла make_lammps.txt в конец файла preinstall.sh
+Файл make_lammps.txt содержит все необходимые пакеты для работы с lammps. Запустите файл preinstall.sh
 ```
-mkdir tests
-cd tests/
-cp ../lammps/mylammps/examples/colloid/in.colloid .
-lmp < in.colloid
+./preinstall.sh
 ```
-Пример вывода:
-
-![image](https://github.com/IKCTO/mppi/assets/131967515/3387e379-9b42-4c5d-ab0c-e36edb2c0d64)
-
-#### Реконфигурация
+В качестве четвертого пункта для компиляции выполните команду:
 ```
-ccmake ../cmake/
-make -j4
+./install.sh ../mylammps mpi
 ```
-
-
 ---
 ### Установка VASP
 > VASP 6.X.X on Ubuntu or Debian
@@ -179,9 +157,6 @@ make DEPS=1 -j
 ```
 export OMP_NUM_THREADS=1
 ```
-
-### Установка MLIP
-https://gitlab.com/ashapeev/mlip-2-tutorials/-/wikis/home
 
 # > Базовые функции инструментов
 
